@@ -5,8 +5,6 @@ from faker import Faker
 from django.db import models
 
 
-
-
 class Student(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
@@ -31,6 +29,18 @@ class Student(models.Model):
             address=faker.address()
         )
         student.save()
+
+
+class Group(models.Model):
+    gr_name = models.CharField(max_length=20)
+    number_of_students = models.IntegerField()
+    curator = models.CharField(max_length=50)
+    faculty = models.CharField(max_length=200)
+    department = models.CharField(max_length=200)
+
+
+
+
 
 
 
