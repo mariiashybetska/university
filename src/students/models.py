@@ -29,6 +29,7 @@ class Student(models.Model):
             address=faker.address()
         )
         student.save()
+        return student
 
 
 class Group(models.Model):
