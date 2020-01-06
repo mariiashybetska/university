@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Groups list</title>
+</head>
+<body>
+<h1>Here is the list of all groups</h1>
+<h2>You can filter by faculty</h2>
+<form action="/groups/" method="get">
+    <input name="faculty">
+    <input name="submit" type="submit">
+</form>
+{{ groups_list|safe }}
+
+</body>
+</html>
