@@ -1,10 +1,10 @@
 from datetime import datetime
+import string
+import random
 
 from faker import Faker
 
 from django.db import models
-
-
 
 
 class Student(models.Model):
@@ -31,10 +31,55 @@ class Student(models.Model):
             address=faker.address()
         )
         student.save()
+        return student
 
 
+class Group(models.Model):
+    gr_name = models.CharField(max_length=20)
+    number_of_students = models.IntegerField()
+    curator = models.CharField(max_length=50)
+    faculty = models.CharField(max_length=200)
+    department = models.CharField(max_length=200)
 
+    def get_info(self):
+        return f'{self.gr_name}, {self.number_of_students}, {self.curator}, {self.faculty}, {self.department}'
 
+    @classmethod
+    def gen_group(cls):
+        faker = Faker()
+        faculty_lst = ['Faculty of Architecture and History of Art',
+                       'Faculty of Philosophy',
+                       'Faculty of Human, Social and Political Science',
+                       'Faculty of Law',
+                       'Faculty of Biology',
+                       'Faculty of Economics',
+                       'Institute of Criminology',
+                       'Engineering',
+                       'Faculty of Business and Management',
+                       'Computer Science and Technology'
+                       ]
 
-
+        department_lst = ['Architecture',
+                          'History of Art',
+                          'East Asian Studies',
+                          'Middle Eastern Studies',
+                          'Biological Anthropology',
+                          'Leverhulme Centre for Human Evolutionary Studies',
+                          'Social Anthropology',
+                          'Centre for Gender Studies',
+                          'Lauterpacht Centre for International Law',
+                          'Energy, Fluid Mechanics and Turbomachinery',
+                          'Civil Engineering',
+                          'Centre for Business Research',
+                          'Psychometrics Centre'
+                          ]
+        group = cls(
+            gr_name=''.join(random.choice(string.ascii_letters + string.digits) for _ in range(7)),
+            number_of_students=random.randint(5, 20),
+            curator=faker.name(),
+            faculty=random.choice(faculty_lst),
+            department=random.choice(department_lst)
+        )
+        group.save()
+        return group
 
