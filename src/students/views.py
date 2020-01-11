@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from students.models import Student, Group
-from students.forms import StudentsAddForm
-
+from students.forms import StudentsAddForm, GroupsAddForm
 
 
 def generate_student(request):
@@ -61,4 +60,18 @@ def stud_add(request):
 
     return render(request,
                   'student_add.html',
+                  context={'form': form})
+
+
+def group_add(request):
+    if request.method == 'POST':
+        form = GroupsAddForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/groups/')
+    else:
+        form = GroupsAddForm()
+
+    return render(request,
+                  'group_add.html',
                   context={'form': form})
