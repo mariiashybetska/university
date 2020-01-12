@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Students list</title>
+    <title>Contact</title>
 </head>
 <body>
-<form action="{% url 'students' %}" method="get">
-    <input name="first_name">
+Contact
+<form action="{% url 'contact'%}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
     <input name="submit" type="submit">
 </form>
-
-{{ students_list|safe }}
 
 </body>
 </html>
