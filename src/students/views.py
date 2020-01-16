@@ -1,8 +1,9 @@
+from students.models import Student, Group
+from students.forms import StudentsAddForm, GroupsAddForm, ContactForm
+
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
-from students.models import Student, Group
-from students.forms import StudentsAddForm, GroupsAddForm, ContactForm
 
 
 def generate_student(request):
@@ -69,7 +70,7 @@ def group_add(request):
         form = GroupsAddForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/groups/')
+            return HttpResponseRedirect(reverse('groups'))
     else:
         form = GroupsAddForm()
 
@@ -109,3 +110,22 @@ def contact(request):
     return render(request,
                   'contact.html',
                   context={'form': form})
+
+
+def group_edit(request, pk):
+    try:
+        group = Group.objects.get(id=pk)
+    except Group.DoesNotExist:
+        return HttpResponseNotFound(f'Group whit id {pk} is not found')
+
+    if request.method == 'POST':
+        form = GroupsAddForm(request.POST, instance=group)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('groups'))
+    else:
+        form = GroupsAddForm(instance=group)
+
+    return render(request,
+                  'group_edit.html',
+                  context={'form': form, 'pk': pk})

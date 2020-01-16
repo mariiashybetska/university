@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Group</title>
+    <title>EDIT teacher</title>
 </head>
 <body>
-Group add
-<form action="{% url 'group-add' %}" method="post">
+EDIT teacher
+
+<form action="{% url 'teacher-edit' pk %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input name="submit" type="submit">
+
 </form>
 </body>
 </html>

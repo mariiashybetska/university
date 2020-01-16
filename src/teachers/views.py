@@ -1,8 +1,9 @@
 from teachers.models import Teacher
 from teachers.forms import TeachersAddForm
 
+from django.urls import reverse
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.db.models import Q
 
 
@@ -34,10 +35,29 @@ def teacher_add(request):
         form = TeachersAddForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/teachers/')
+            return HttpResponseRedirect(reverse('teachers'))
     else:
         form = TeachersAddForm()
 
     return render(request,
                   'teacher_add.html',
                   context={'form': form})
+
+
+def teacher_edit(request, pk):
+    try:
+        teacher = Teacher.objects.get(id=pk)
+    except Teacher.DoesNotExist:
+        return HttpResponseNotFound(f'Teacher whit id {pk} is not found')
+
+    if request.method == 'POST':
+        form = TeachersAddForm(request.POST, instance=teacher)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('teachers'))
+    else:
+        form = TeachersAddForm(instance=teacher)
+
+    return render(request,
+                  'teacher_edit.html',
+                  context={'form': form, 'pk': pk})

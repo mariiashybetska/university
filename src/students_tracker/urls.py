@@ -15,13 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from teachers.views import generate_teacher, teachers, teacher_add
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('generate-teacher/', generate_teacher),
-    path('teachers/', teachers),
-    path('teachers/add/', teacher_add),
     path('students/', include('students.urls')),
-
+    path('teachers/', include('teachers.urls')),
 ]

@@ -7,7 +7,7 @@
 <body>
 <h1>Here is the list of all teachers</h1>
 <h2>You can filter by searching in first name, last name or e-mail</h2>
-<form action="/teachers/" method="get">
+<form action="{% url 'teachers' %}" method="get">
     <input name="filter">
     <input name="submit" type="submit">
 </form>
