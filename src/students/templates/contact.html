@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ADD STUDENT</title>
+    <title>Contact</title>
 </head>
 <body>
-ADD STUDENT
-<form action="{% url 'students-add' %}" method="post">
+Contact
+<form action="{% url 'contact' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input name="submit" type="submit">

@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Students list</title>
-</head>
-<body>
-<form action="/students/" method="get">
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{% url 'students' %}" method="get">
     <input name="first_name">
     <input name="submit" type="submit">
 </form>
 
-{{ students_list|safe }}
+{% for student in students %}
+<a href="{% url 'students-edit' student.id%}">{{ student.first_name}} {{ student.last_name }}<br></a>
+{% endfor %}
 
-</body>
-</html>
+{# students_list|safe #}
+{% endblock content %}

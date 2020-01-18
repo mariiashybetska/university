@@ -82,4 +82,3 @@ class Group(models.Model):
         )
         group.save()
         return group
-
