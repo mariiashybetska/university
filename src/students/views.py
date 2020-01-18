@@ -101,6 +101,9 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
+            with open('log.txt', 'a') as f:
+                for key, value in form.cleaned_data.items():
+                    f.write(f'{key}:{value}\n')
             form.save()
             return HttpResponseRedirect(reverse('contact'))
     else:
