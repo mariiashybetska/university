@@ -12,7 +12,7 @@ def generate_student(request):
 
 def students(request):
     queryset = Student.objects.all()
-    response = ''
+    # response = ''
 
     fn = request.GET.get('first_name')
     if fn:
@@ -22,11 +22,11 @@ def students(request):
         # __startswith --> like 'blabla%'
         # __istarts/ends/--> регистронезависимый поиск
 
-    for student in queryset:
-        response += student.get_info() + '<br>'
+    # for student in queryset:
+    #     response += student.get_info() + '<br>'
     return render(request,
                   'students_list.html',
-                  context={'students_list': response})
+                  context={'students': queryset})
 
 
 def generate_group(request):
