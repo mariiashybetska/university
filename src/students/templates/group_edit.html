@@ -1,0 +1,10 @@
+{% block title %}Edit group{% endblock title%}
+
+{% block content %}
+EDIT GROUP
+<form action="{% url 'group-edit' pk %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input name="submit" type="submit">
+</form>
+{% endblock content %}

@@ -1,17 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Teachers list</title>
-</head>
-<body>
-<h1>Here is the list of all teachers</h1>
+{% extends 'base.html' %}
+
+{% block title %}List of teachers{% endblock title %}
+
+{% block content %}
 <h2>You can filter by searching in first name, last name or e-mail</h2>
-<form action="/teachers/" method="get">
+<form action="{% url 'teachers' %}" method="get">
     <input name="filter">
     <input name="submit" type="submit">
 </form>
-{{ teachers_list|safe }}
+<table align="center" bgcolor="#E4FFFA" border="1" rules="cols">
+    <caption style="font-size:28px">List of all teachers</caption>
+    <tr>
+        <th>ID</th>
+        <th>FIRST NAME</th>
+        <th>LAST NAME</th>
+        <th>BIRTH DATE</th>
+        <th>E-MAIL</th>
+        <th>TELEPHONE</th>
+        <th>FACULTY</th>
+        <th>EDIT</th>
+    </tr>
+    {% for teacher in teachers %}
+    <tr>
+        <td> {{ teacher.id }} </td>
+        <td> {{ teacher.first_name }} </td>
+        <td> {{ teacher.last_name }} </td>
+        <td> {{ teacher.birth_date }} </td>
+        <td> {{ teacher.email }} </td>
+        <td> {{ teacher.telephone }} </td>
+        <td> {{ teacher.faculty }} </td>
+        <td><form><button formaction="{% url 'teacher-edit' teacher.id %}">EDIT</button></form></td>
+    </tr>
+    {% endfor %}
+</table>
 
-</body>
-</html>
+{% endblock content %}
+
