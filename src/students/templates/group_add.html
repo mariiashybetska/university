@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Group</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Add new group{% endblock title%}
+
+{% block content %}
 Group add
-<form action="/groups/add/" method="post">
+<form action="{% url 'groups-add' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input name="submit" type="submit">
 </form>
-</body>
-</html>
+{% endblock content %}

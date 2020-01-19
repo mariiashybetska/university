@@ -1,14 +1,39 @@
 {% extends 'base.html' %}
 
+{% block title %}List of students{% endblock title %}
+
 {% block content %}
 <form action="{% url 'students' %}" method="get">
     <input name="first_name">
     <input name="submit" type="submit">
 </form>
+<p></p>
+<form align="left"><button formaction="{% url 'students-add' %}">ADD STUDENT</button></form>
 
-{% for student in students %}
-<a href="{% url 'students-edit' student.id%}">{{ student.first_name}} {{ student.last_name }}<br></a>
-{% endfor %}
+<table border="1" bgcolor="#E6DAFD" align="center">
+     <caption style="font-size:28px">List of all students</caption>
+    <tr>
+        <th>ID</th>
+        <th>FIRST NAME</th>
+        <th>LAST NAME</th>
+        <th>BIRTH DATE</th>
+        <th>E-MAIL</th>
+        <th>TELEPHONE</th>
+        <th>ADDRESS</th>
+        <th>EDIT</th>
+    </tr>
+    {% for student in students %}
+    <tr>
+        <td> {{ student.id }} </td>
+        <td> {{ student.first_name }} </td>
+        <td> {{ student.last_name }} </td>
+        <td> {{ student.birth_date }} </td>
+        <td> {{ student.email }} </td>
+        <td> {{ student.telephone }} </td>
+        <td> {{ student.address }} </td>
+        <td><form><button formaction="{% url 'students-edit' student.id %}">EDIT</button></form></td>
+    </tr>
+    {% endfor %}
+</table>
 
-{# students_list|safe #}
 {% endblock content %}
