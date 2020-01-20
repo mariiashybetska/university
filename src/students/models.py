@@ -15,6 +15,9 @@ class Student(models.Model):
     # add avatar TODO
     telephone = models.CharField(max_length=16)  # clean phone TODO
     address = models.CharField(max_length=255, null=True, blank=True)
+    group = models.ForeignKey('students.Group',
+                              null=True, blank=True,
+                              on_delete=models.CASCADE)
 
     def get_info(self):
         return f'{self.first_name} {self.last_name} {self.birth_date}'
