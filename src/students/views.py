@@ -12,7 +12,7 @@ def generate_student(request):
 
 
 def students(request):
-    queryset = Student.objects.all().select_related('group')  # указываем название внешнего ключа
+    queryset = Student.objects.all().select_related('group_id')  # указываем название внешнего ключа
     # response = ''
 
     fn = request.GET.get('first_name')
@@ -36,7 +36,8 @@ def generate_group(request):
 
 
 def groups(request):
-    queryset = Group.objects.all()
+    queryset = Group.objects.all().select_related('starosta', 'curator')
+
     # response = ''
 
     f = request.GET.get('faculty')

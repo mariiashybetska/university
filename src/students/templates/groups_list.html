@@ -16,6 +16,7 @@
         <th>ID</th>
         <th>CODE</th>
         <th>NUMBER OF STUDENTS</th>
+        <th>STAROSTA</th>
         <th>CURATOR</th>
         <th>FACULTY</th>
         <th>DEPARTMENT</th>
@@ -26,6 +27,7 @@
         <td> {{ group.id }} </td>
         <td> {{ group.gr_name}} </td>
         <td> {{ group.number_of_students }} </td>
+        <td> {{ group.starosta.first_name }} {{ group.starosta.last_name }}</td>
         <td> {{ group.curator }} </td>
         <td> {{ group.faculty }} </td>
         <td> {{ group.department }} </td>
