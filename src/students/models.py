@@ -53,7 +53,7 @@ class Group(models.Model):
     starosta = models.ForeignKey('students.Student',
                                  null=True, blank=True,
                                  on_delete=models.CASCADE)
-    curator = models.ForeignKey('teachers.Teacher',
+    teacher = models.ForeignKey('teachers.Teacher',
                                 null=True, blank=True,
                                 on_delete=models.CASCADE)
 
@@ -93,9 +93,8 @@ class Group(models.Model):
         group = cls(
             gr_name=''.join(random.choice(string.ascii_letters + string.digits) for _ in range(7)),
             number_of_students=random.randint(5, 20),
-            curator=faker.name(),
             faculty=random.choice(faculty_lst),
-            department=random.choice(department_lst),
+            department=random.choice(department_lst)
         )
         group.save()
         return group

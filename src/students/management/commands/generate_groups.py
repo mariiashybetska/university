@@ -24,6 +24,6 @@ class Command(BaseCommand):
         for i in range(number):
             group = Group.gen_group()
             group.starosta = random.choice(students)
-            group.curator = random.choice(teachers)
+            group.teacher = random.choice(teachers)
             group.save()
 

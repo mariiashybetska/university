@@ -36,7 +36,7 @@ def generate_group(request):
 
 
 def groups(request):
-    queryset = Group.objects.all().select_related('starosta', 'curator')
+    queryset = Group.objects.all().select_related('starosta', 'teacher')
 
     # response = ''
 

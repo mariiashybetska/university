@@ -28,7 +28,7 @@
         <td> {{ group.gr_name}} </td>
         <td> {{ group.number_of_students }} </td>
         <td> {{ group.starosta.first_name }} {{ group.starosta.last_name }}</td>
-        <td> {{ group.curator }} </td>
+        <td> {{ group.teacher.first_name }} {{ group.teacher.last_name }} </td>
         <td> {{ group.faculty }} </td>
         <td> {{ group.department }} </td>
         <td> <a href="{% url 'group-edit' group.id%}">EDIT</a> </td>
