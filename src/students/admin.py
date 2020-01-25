@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from students.models import Student
+from students.models import Student, Group
 
 
 class StudentAdmin(admin.ModelAdmin):
@@ -15,5 +15,20 @@ class StudentAdmin(admin.ModelAdmin):
         return ()
 
 
-
 admin.site.register(Student, StudentAdmin)
+
+
+class StudentInline(admin.TabularInline):
+    model = Student
+    raw_id_fields = ('group_id',)
+
+
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ('id', 'gr_name', 'number_of_students', 'faculty', 'department', 'starosta', 'teacher')
+    list_select_related = ('starosta', 'teacher')
+    inlines = [
+        StudentInline,
+    ]
+
+
+admin.site.register(Group, GroupAdmin)

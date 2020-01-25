@@ -58,7 +58,10 @@ class Group(models.Model):
                                 on_delete=models.CASCADE)
 
     def get_info(self):
-        return f'{self.gr_name}, {self.number_of_students}, {self.curator}, {self.faculty}, {self.department}'
+        return f'{self.gr_name}, {self.number_of_students}, {self.teacher.full_name}, {self.faculty}, {self.department}'
+
+    def __str__(self):
+        return f'{self.gr_name}'
 
     @classmethod
     def gen_group(cls):
