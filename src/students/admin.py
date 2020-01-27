@@ -30,5 +30,4 @@ class GroupAdmin(admin.ModelAdmin):
         StudentInline,
     ]
 
-
 admin.site.register(Group, GroupAdmin)
