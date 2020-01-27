@@ -86,16 +86,6 @@ WSGI_APPLICATION = 'students_tracker.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'hillel',
-        'USER': 'mary',
-        'PASSWORD': 'h14847vi',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
 
 
 # Password validation
@@ -158,15 +148,11 @@ LOGGING = {
     }
 }
 
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'mshybetska@gmail.com'
-EMAIL_HOST_PASSWORD = '100333dp'
-
-
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+try:
+    from students_tracker.settings_local import *
+except ImportError:
+    print('settings_local module not found')
