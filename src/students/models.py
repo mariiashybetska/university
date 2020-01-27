@@ -8,10 +8,17 @@ from django.db import models
 
 
 class Student(models.Model):
+    GRADE_CHOICES = (
+        (1, 'Junior'),
+        (2, 'Middle'),
+        (3, 'Senior'),
+    )
+
+    grade = models.PositiveSmallIntegerField(choices=GRADE_CHOICES)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     birth_date = models.DateField()
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     # add avatar TODO
     telephone = models.CharField(max_length=30)  # clean phone TODO
     address = models.CharField(max_length=255, null=True, blank=True)
@@ -101,3 +108,5 @@ class Group(models.Model):
         )
         group.save()
         return group
+
+from students.signals import *
