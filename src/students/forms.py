@@ -19,7 +19,7 @@ class BaseStudentForm(ModelForm):
         return email
 
     def clean_telephone(self):
-        telephone = self.cleaned_data('telephone')
+        telephone = self.cleaned_data['telephone']
         telephone_exists = Student.objects \
             .filter(telephone__exact=telephone) \
             .exclude(telephone__exact=self.instance.telephone) \
