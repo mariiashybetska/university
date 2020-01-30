@@ -1,3 +1,13 @@
-from django.test import TestCase
+from django.test import TestCase, Client
+import unittest
 
-# Create your tests here.
+
+class TestStudentsList(unittest.TestCase):
+    def test_details(self):
+        client = Client()
+        response = client.get('/students/list/')
+        self.assertEqual(response.status_code, 200)
+
+
+
+

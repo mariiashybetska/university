@@ -20,7 +20,7 @@ class Student(models.Model):
     birth_date = models.DateField()
     email = models.EmailField(unique=True)
     # add avatar TODO
-    telephone = models.CharField(max_length=30)  # clean phone TODO
+    telephone = models.CharField(max_length=30, unique=True)  # clean phone TODO
     address = models.CharField(max_length=255, null=True, blank=True)
     group_id = models.ForeignKey('students.Group',
                                  null=True, blank=True,
