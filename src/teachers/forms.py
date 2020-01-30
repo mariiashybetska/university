@@ -9,7 +9,7 @@ class TeacherBaseForm(ModelForm):
 
         email_exists = Teacher.objects \
             .filter(email__iexact=email) \
-            .exclude(email__iexact=self.instance.email) \
+            .exclude(id=self.instance.id) \
             .exists()
 
         if email_exists:
@@ -18,15 +18,17 @@ class TeacherBaseForm(ModelForm):
 
     def clean_telephone(self):
         telephone = self.cleaned_data['telephone']
+
+        if not telephone.isdigit():
+            raise ValidationError(f'Telephone must contains only digits')
+
         telephone_exists = Teacher.objects \
             .filter(telephone__exact=telephone) \
-            .exclude(telephone__exact=self.instance.telephone) \
+            .exclude(id=self.instance.id) \
             .exists()
 
         if telephone_exists:
             raise ValidationError(f'Telephone {telephone} ia already used')
-        elif not telephone.isdigit():
-            raise ValidationError(f'Telephone must contains only digits')
         return telephone
 
 
