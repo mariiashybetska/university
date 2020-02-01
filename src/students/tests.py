@@ -3,11 +3,11 @@ from django.urls import reverse
 import unittest
 
 
-# class TestStudentsList(unittest.TestCase):
-#     def test_details(self):
-#         client = Client()
-#         response = client.get('/students/list/')
-#         self.assertEqual(response.status_code, 200)
+class TestStudentsList(unittest.TestCase):
+    def test_details(self):
+        client = Client()
+        response = client.get(reverse('students'))
+        self.assertEqual(response.status_code, 200)
 
 
 class TestContact(TestCase):
