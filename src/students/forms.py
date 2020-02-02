@@ -45,7 +45,8 @@ class StudentsAddForm(BaseStudentForm):
 class StudentsAdminForm(BaseStudentForm):
     class Meta:
         model = Student
-        fields = ('id', 'grade', 'email', 'first_name', 'last_name', 'birth_date', 'telephone', 'active_user')
+        fields = ('id', 'grade', 'email', 'first_name', 'last_name', 'birth_date', 'telephone', 'group_id',
+                  'active_user')
 
 
 class GroupsAddForm(ModelForm):
