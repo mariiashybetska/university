@@ -16,7 +16,7 @@ class MyMiddleware:
 
         if request.path.find('admin/') != -1:
             # print('MIDDLEWARE' * 10)
-            # print('MIDDLEWARE' * 10)
+            # print('MIDDLEWARE' * 10)git
             # print('MIDDLEWARE' * 10)
             # print('MIDDLEWARE' * 10)
             log = Logger.objects.create(
