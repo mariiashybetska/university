@@ -111,4 +111,13 @@ class Group(models.Model):
         return group
 
 
+class Logger(models.Model):
+    path = models.CharField(max_length=200)
+    method = models.CharField(max_length=6)
+    time_delta = models.CharField(max_length=50)
+    user_id = models.IntegerField()
+    user_email = models.EmailField()
+    created = models.DateTimeField(auto_now=True)
+
+
 from students.signals import *
