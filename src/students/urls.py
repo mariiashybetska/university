@@ -3,7 +3,7 @@ from students.views import (
     generate_student, students,
     generate_group, groups, stud_add,
     group_add, students_edit, contact,
-    group_edit)
+    group_edit, reg_user, activate_user)
 
 
 urlpatterns = [
@@ -15,5 +15,7 @@ urlpatterns = [
     path('groups-add/', group_add, name='groups-add'),
     path('edit/<int:pk>/', students_edit, name='students-edit'),
     path('contact/', contact, name='contact'),
-    path('groups/edit/<int:pk>/', group_edit, name='group-edit')
+    path('groups/edit/<int:pk>/', group_edit, name='group-edit'),
+    path('registration/', reg_user, name='registration'),
+    path('registration/confirm/<int:pk>/', activate_user, name='activate')
 ]

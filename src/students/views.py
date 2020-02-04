@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 
 from students.models import Student, Group
-from students.forms import StudentsAddForm, GroupsAddForm, ContactForm
+from students.forms import StudentsAddForm, GroupsAddForm, ContactForm, RegistrationForm
 
 
 def generate_student(request):
@@ -133,3 +133,30 @@ def group_edit(request, pk):
     return render(request,
                   'group_edit.html',
                   context={'form': form, 'pk': pk})
+
+
+def reg_user(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('registration'))
+    else:
+        form = RegistrationForm()
+
+    return render(request,
+                  'registration.html',
+                  context={'form': form})
+
+
+def activate_user(request, pk):
+    try:
+        student = Student.objects.get(id=pk)
+    except Student.DoesNotExist:
+        return HttpResponseNotFound(f'Student whit id {pk} is not found')
+
+    student.active_user = True
+    student.save()
+    return render(request,
+                  'activate_user.html',
+                  context={'student': student})

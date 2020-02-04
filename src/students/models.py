@@ -25,6 +25,7 @@ class Student(models.Model):
     group_id = models.ForeignKey('students.Group',
                                  null=True, blank=True,
                                  on_delete=models.CASCADE)
+    active_user = models.BooleanField(default=False)
 
     def get_info(self):
         return f'{self.first_name} {self.last_name} {self.birth_date}'
