@@ -1,4 +1,4 @@
-from datetime import datetime
+import time
 
 from students.models import Logger
 
@@ -10,22 +10,20 @@ class MyMiddleware:
 
     def __call__(self, request):
 
-        time_start = datetime.now()
+        time_start = time.time()
 
         response = self.get_response(request)
+        admin_url = '/admin/'
 
-        if request.path.find('admin/') != -1:
-            # print('MIDDLEWARE' * 10)
-            # print('MIDDLEWARE' * 10)git
-            # print('MIDDLEWARE' * 10)
-            # print('MIDDLEWARE' * 10)
-            log = Logger.objects.create(
+        if request.path.startwith(admin_url):
+            diff = time.time() - time_start
+
+            Logger.objects.create(
                 path=request.path,
                 method=request.method,
-                time_delta=str(datetime.now() - time_start),
+                time_delta=diff,
                 user_id=request.user.id,
                 user_email=str(request.user)
             )
-            log.save()
 
         return response
