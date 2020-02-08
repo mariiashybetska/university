@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.contrib.auth import login, authenticate, logout
 
 from students.models import Student, Group
-from students.forms import StudentsAddForm, GroupsAddForm, ContactForm, RegistrationForm
+from students.forms import (StudentsAddForm, GroupsAddForm, ContactForm, RegistrationForm,
+                            UserRegistrationForm, UserLoginForm)
 
 
 def generate_student(request):
@@ -160,3 +162,44 @@ def activate_user(request, pk):
     return render(request,
                   'activate_user.html',
                   context={'student': student})
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('reg'))
+    else:
+        form = UserRegistrationForm()
+
+    return render(request,
+                  'register.html',
+                  context={'form': form})
+
+
+def custom_login(request):
+    user_form = UserLoginForm
+
+    if request.GET.get('logout'):
+        logout(request)
+
+    if request.method == 'POST':
+        form = user_form(request.POST)
+        if form.is_valid():
+            user = authenticate(request,
+                                username=form.cleaned_data['username'],
+                                password=form.cleaned_data['password'],
+                                )
+            login(request, user)
+
+            return HttpResponseRedirect(reverse('students'))
+    else:
+        form = user_form()
+
+    return render(request,
+                  'login.html',
+                  context={'form': form})
+
+
+

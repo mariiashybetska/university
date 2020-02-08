@@ -15,7 +15,7 @@ class MyMiddleware:
         response = self.get_response(request)
         admin_url = '/admin/'
 
-        if request.path.startwith(admin_url):
+        if request.path.startswith(admin_url):
             diff = time.time() - time_start
 
             Logger.objects.create(

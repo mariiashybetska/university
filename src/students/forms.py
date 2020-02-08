@@ -1,4 +1,5 @@
 from django.forms import ModelForm, Form, EmailField, CharField, ValidationError
+from django.contrib.auth.models import User
 
 from students.models import Student, Group
 from students.tasks import send_email_async
@@ -89,4 +90,23 @@ class RegistrationForm(BaseStudentForm):
         message = f'Please, confirm your email. The link is http://127.0.0.1:8000/students/registration/confirm/{s.id}'
         email_from = self.instance.email
         send_email_async.delay(subject, message, email_from)
+
+
+class UserRegistrationForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.set_password(self.cleaned_data['password'])
+        super().save(commit)
+
+
+class UserLoginForm(Form):
+    username = CharField()
+    password = CharField()
+
+
+
 
