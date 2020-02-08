@@ -1,12 +1,14 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from django.conf.urls import url
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('students/', include('students.urls')),
     path('teachers/', include('teachers.urls')),
+    url(r'^silk/', include('silk.urls', namespace='silk')),
 ]
 
 
