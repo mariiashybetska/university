@@ -153,11 +153,6 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-try:
-    from students_tracker.settings_local import *
-except ImportError:
-    print('settings_local module not found')
-
 CELERY_BEAT_SCHEDULE = {
     # 'test_log_delete': {
     #     'task': 'students.tasks.delete_logs_test',
@@ -168,3 +163,10 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute=0, hour=0),  # everyday at midnight
     },
 }
+
+try:
+    from students_tracker.settings_local import *
+except ImportError:
+    print('settings_local module not found')
+
+
