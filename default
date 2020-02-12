@@ -1,0 +1,20 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+
+	server_name www.students-tracker.com 127.0.0.1;
+
+	location /static/ {
+	    root /home/mary/PycharmProjects/university/src;
+
+	}
+
+	location / {
+	    include proxy_params;
+		proxy_pass http://127.0.0.1:8000;
+	}
+	}
+
+

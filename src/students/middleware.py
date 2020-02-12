@@ -15,15 +15,15 @@ class MyMiddleware:
         response = self.get_response(request)
         admin_url = '/admin/'
 
-        if request.path.startswith(admin_url):
-            diff = time.time() - time_start
-
-            Logger.objects.create(
-                path=request.path,
-                method=request.method,
-                time_delta=diff,
-                user_id=request.user.id,
-                user_email=str(request.user)
-            )
+        # if request.path.startswith(admin_url):
+        #     diff = time.time() - time_start
+        #
+        #     Logger.objects.create(
+        #         path=request.path,
+        #         method=request.method,
+        #         time_delta=diff,
+        #         user_id=request.user.id,
+        #         user_email=str(request.user)
+        #     )
 
         return response
