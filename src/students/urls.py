@@ -20,5 +20,5 @@ urlpatterns = [
     path('registration/', reg_user, name='registration'),
     path('registration/confirm/<int:pk>/', activate_user, name='activate'),
     path('register/', register, name='reg'),
-    path('login/', custom_login, name='login')
+    path('login/', custom_login, name='login'),
 ]

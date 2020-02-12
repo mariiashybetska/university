@@ -166,7 +166,6 @@ CELERY_BEAT_SCHEDULE = {
 }
 
 
-
 try:
     from students_tracker.settings_local import *
 except ImportError:
