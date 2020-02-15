@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^silk/', include('silk.urls', namespace='silk')),
 ]
 
+handler404 = 'students.views.handler404'
+handler500 = 'students.views.handler500'
 
 if settings.DEBUG:
     import debug_toolbar
